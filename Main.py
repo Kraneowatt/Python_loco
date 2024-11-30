@@ -5,14 +5,14 @@ sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 import tkinter as tk
 from tkinter import messagebox
 
-from MenuUsuario.Logica import UsuarioLogica
-from MenuUsuario.Interfaz import UsuarioInterfaz
+from MenuUsuario.Logica.UsuarioLogica import UsuarioLogica
+from MenuUsuario.Interfaz.UsuarioInterfaz import UsuarioInterfaz
 
-from MenuAdmin.Logica import AdminLogica
-from MenuAdmin.Interfaz import AdminInterfaz
+from MenuAdmin.Logica.AdminLogica import AdminLogica
+from MenuAdmin.Interfaz.AdminInterfaz import AdminInterfaz
 
-from Invitado.Logica import InvitadoLogica
-from Invitado.Interfaz import InvitadoInterfaz
+from Invitado.Logica.InvitadoLogica import InvitadoLogica
+from Invitado.Interfaz.InvitadoInterfaz import InvitadoInterfaz
 
 from ConexionBaseDatos.BaseDatos import ConexionBaseDatos
 
