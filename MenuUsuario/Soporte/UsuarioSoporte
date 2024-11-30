@@ -4,6 +4,9 @@ class UsuarioSoporte:
     """
     Clase de soporte para tareas auxiliares del usuario.
     """
+    def __init__(self, root):
+        self.root = root
+        
     @staticmethod
     def validar_encuesta(eficacia, precision, interaccion):
         """

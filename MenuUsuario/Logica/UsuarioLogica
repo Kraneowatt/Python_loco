@@ -5,8 +5,9 @@ class UsuarioLogica:
     """
     Clase para manejar la lógica del usuario.
     """
-    def __init__(self, conexion_base_datos):
+    def __init__(self, conexion_base_datos,root):
         self.conexion_base_datos = conexion_base_datos
+        self.root=root
 
     def obtener_nombre_usuario(self, user_id):
         """

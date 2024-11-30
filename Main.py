@@ -2,13 +2,18 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 # Intentar con la importación estándar
-from MenuUsuario.UsuarioLogica import UsuarioLogica
 import tkinter as tk
 from tkinter import messagebox
+from MenuUsuario.Logica import *
+from MenuUsuario.Interfaz import *
+from MenuUsuario.Soporte import *
+
+
+
+
 from MenuAdmin.AdminLogica import AdminLogica
 from MenuAdmin.AdminInterfaz import AdminInterfaz
-from MenuUsuario.UsuarioLogica import UsuarioLogica
-from MenuUsuario.UsuarioInterfaz import UsuarioInterfaz
+
 from Invitado.InvitadoLogica import InvitadoLogica
 from Invitado.InvitadoInterfaz import InvitadoInterfaz
 from ConexionBaseDatos.BaseDatos import ConexionBaseDatos
