@@ -10,6 +10,7 @@ from MenuUsuario.Interfaz.UsuarioInterfaz import UsuarioInterfaz
 
 from MenuAdmin.Logica.AdminLogica import AdminLogica
 from MenuAdmin.Interfaz.AdminInterfaz import AdminInterfaz
+from MenuAdmin.Soporte.AdminSoporte import AdminSoporte
 
 from Invitado.Logica.InvitadoLogica import InvitadoLogica
 from Invitado.Interfaz.InvitadoInterfaz import InvitadoInterfaz
@@ -28,7 +29,8 @@ def abrir_menu_principal():
     def abrir_admin():
         # Conectar con la base de datos
         conexion_bd = ConexionBaseDatos('ODBC Driver 17 for SQL Server', 'DESKTOP-ERHEOKF\SQLEXPRESS', 'Hola')
-        admin_logica = AdminLogica(conexion_bd)
+        admin_soporte=AdminSoporte(conexion_bd)
+        admin_logica = AdminLogica(conexion_bd,admin_soporte)
         admin_interfaz = AdminInterfaz(root, admin_logica)
         admin_interfaz.mostrar_dashboard(1)  # ID de ejemplo para el administrador
 

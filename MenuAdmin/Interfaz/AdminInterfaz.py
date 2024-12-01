@@ -47,7 +47,7 @@ class AdminInterfaz:
 
         btn_notificaciones = tk.Button(main_frame, text="Notificaciones", 
                                        font=("Arial", 12), bg="#2196F3", fg="white",
-                                       command=self.admin_logica.abrir_notificaciones)
+                                       command=partial(self.admin_logica.abrir_notificaciones,self.root))
         btn_notificaciones.pack(pady=10)
 
         btn_logout = tk.Button(main_frame, text="Cerrar Sesión", 

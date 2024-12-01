@@ -6,13 +6,15 @@ from tkcalendar import Calendar
 from functools import partial
 from tkinter import ttk
 from tkinter import filedialog, messagebox, simpledialog
+import subprocess
 
 class AdminLogica:
     """
     Clase para manejar la lógica del administrador.
     """
-    def __init__(self, conexion_base_datos):
+    def __init__(self, conexion_base_datos,admin_soporte):
         self.conexion_base_datos = conexion_base_datos
+        self.admin_soporte=admin_soporte
 
     def obtener_nombre_usuario(self, user_id):
         """
@@ -87,11 +89,40 @@ class AdminLogica:
                         button = tk.Button(main_frame, text=button_text, bg=color, font=("Arial", 12), command=button_functions[idx-11])
                         button.grid(row=idx, column=0, columnspan=2, pady=10, padx=10, sticky="ew")
 
-    def abrir_notificaciones(self):
-        """
-        Abre la ventana de notificaciones (placeholder).
-        """
+    def abrir_notificaciones(self,root):
+        notiadmin_window = tk.Toplevel(root)
+        notiadmin_window.title("Good Airs - Dataset Dashboard")
+        notiadmin_window.geometry("800x600")
+        notiadmin_window.config(bg="#e6e6e6")
+    
+        main_frame = tk.Frame(notiadmin_window, bg="#e6e6e6")
+        main_frame.pack(expand=True, fill='both', padx=20, pady=20)
+    
+        title_label = tk.Label(main_frame, text="Notificaciones del Día", font=("Arial", 20, "bold"), bg="#e6e6e6")
+        title_label.grid(row=0, columnspan=8, pady=10)
+    
+        surveys = self.admin_soporte.get_today_surveys()
+    
+        if not surveys:
+            messagebox.showinfo("No Encuestas", "No hay encuestas realizadas hoy.")
+            return
+        
+        headers = ["ID Usuario", "Nombre", "Username", "Fecha", "Eficacia", "Precisión", "Interacción", "Comentario"]
+        
+        for col, header in enumerate(headers):
+            label = tk.Label(main_frame, text=header, font=("Arial", 12, "bold"), bg="#e6e6e6")
+            label.grid(row=1, column=col, padx=10, pady=5)
+            
+            for row, survey in enumerate(surveys, start=2):
+                for col, data in enumerate(survey):
+                    label = tk.Label(main_frame, text=data, font=("Arial", 12), bg="#e6e6e6")
+                    label.grid(row=row, column=col, padx=10, pady=5)
+    
+        close_button = tk.Button(notiadmin_window, text="Cerrar", command=notiadmin_window.destroy)
+        close_button.pack(pady=10)
         messagebox.showinfo("Notificaciones", "Funcionalidad en desarrollo.")
+
+
 
     def select_date(self, input_fields):
         def grab_date():
@@ -109,7 +140,7 @@ class AdminLogica:
     
     
     def consultar_dataset(self): 
-        file_path = r"C:\Users\proje\Desktop\GoodAirs\GestionAdmin\DatasetAdminGest.csv"
+        file_path = r"C:\Users\HP OMEN\Desktop\GoodAirs\Python_loco\datasets\DatasetAdminGest.csv"
         try:
             df = pd.read_csv(file_path, sep=',', encoding='utf-8')
             dataset_window = tk.Toplevel()
@@ -173,8 +204,8 @@ class AdminLogica:
         except Exception as e:
                 messagebox.showerror("Error", f"No se pudo cargar el archivo: {e}")
 
-    def ver_dataset_normalizado():
-            file_path = r"C:\Users\proje\Desktop\GoodAirs\GestionAdmin\UnBuenDataset.csv"
+    def ver_dataset_normalizado(self):
+            file_path = r"C:\Users\HP OMEN\Desktop\GoodAirs\Python_loco\datasets\UnBuenDataset.csv"
             try:
                 df = pd.read_csv(file_path, sep=',', encoding='utf-8')
                 dataset_window = tk.Toplevel()

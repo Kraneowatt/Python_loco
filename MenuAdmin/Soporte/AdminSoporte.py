@@ -3,9 +3,8 @@ import pandas as pd
 
 
 class AdminSoporte:
-    """
-    Clase de soporte para tareas auxiliares del administrador.
-    """
+    def __init__(self, conexion_bd):
+        self.conexion_bd = conexion_bd
     @staticmethod
     def validar_dato_existente(df, column_name, value):
         """
@@ -53,4 +52,17 @@ class AdminSoporte:
         except Exception as e:
             messagebox.showerror("Error", f"No se pudo guardar el archivo: {e}")
     
-    
+    def get_today_surveys(self):
+        conn = self.conexion_bd.conectar()
+        cursor = conn.cursor()
+        query = """
+        SELECT u.idUsuario, u.nombre, u.username, e.fecha, e.eficacia, e.precision, e.interaccion, e.comentario
+        FROM EncuestaDiaria e
+        JOIN Usuario u ON e.idUsuario = u.idUsuario
+        WHERE e.fecha = CAST(GETDATE() AS DATE)
+        ORDER BY e.fecha DESC
+        """
+        cursor.execute(query)
+        surveys = cursor.fetchall()
+        conn.close()
+        return surveys
