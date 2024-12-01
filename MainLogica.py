@@ -8,8 +8,8 @@ from datetime import datetime, date, timedelta
 from functools import partial
 import numpy as np
 import pandas as pd
-from tensorflow.keras.models import load_model
 from MainSoporte import main_soporte
+
 class mainlogica:
     def __init__(self):
         pass
@@ -133,8 +133,7 @@ class mainlogica:
         # Comprobar si el usuario ya existe
 
 def show_predictionguest(self):
-    # Obtener el último registro del dataset (ya normalizado)
-    dataset = pd.read_csv("C:\Users\HP OMEN\Desktop\GoodAirs\Python_loco\datasets\DatasetAdminGest.csv")
+    dataset = pd.read_csv("C:/Users/HP OMEN/Desktop/GoodAirs/Python_loco/datasets/DatasetAdminGest.csv")
     ultimo_registro = dataset.iloc[-1]
     
     # Crear un diccionario con los valores de entrada del último registro
