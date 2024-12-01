@@ -1,4 +1,6 @@
 from tkinter import messagebox
+import pandas as pd
+
 
 class AdminSoporte:
     """
@@ -50,3 +52,5 @@ class AdminSoporte:
             messagebox.showinfo("Éxito", "El dataset ha sido guardado correctamente.")
         except Exception as e:
             messagebox.showerror("Error", f"No se pudo guardar el archivo: {e}")
+    
+    

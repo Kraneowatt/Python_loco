@@ -1,6 +1,7 @@
 import tkinter as tk
-from tkinter import ttk, messagebox
-
+from tkinter import messagebox
+from tkinter import filedialog, messagebox, simpledialog
+from functools import partial
 class AdminInterfaz:
     """
     Clase para manejar la interfaz gráfica del administrador.
@@ -41,7 +42,7 @@ class AdminInterfaz:
         # Botones
         btn_gestion = tk.Button(main_frame, text="Gestionar Dataset", 
                                 font=("Arial", 12), bg="#4CAF50", fg="white",
-                                command=self.admin_logica.abrir_gestion_dataset)
+                                command=partial(self.admin_logica.abrir_gestion_dataset,self.root))
         btn_gestion.pack(pady=10)
 
         btn_notificaciones = tk.Button(main_frame, text="Notificaciones", 
@@ -58,3 +59,6 @@ class AdminInterfaz:
         version_label = tk.Label(main_frame, text="Versión 1.2", 
                                  font=("Arial", 10), bg="#f2f2f2")
         version_label.pack(side='bottom', pady=10)
+
+
+            

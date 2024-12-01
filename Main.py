@@ -27,7 +27,7 @@ def abrir_menu_principal():
 
     def abrir_admin():
         # Conectar con la base de datos
-        conexion_bd = ConexionBaseDatos('ODBC Driver 17 for SQL Server', 'localhost', 'GoodAirs')
+        conexion_bd = ConexionBaseDatos('ODBC Driver 17 for SQL Server', 'DESKTOP-ERHEOKF\SQLEXPRESS', 'Hola')
         admin_logica = AdminLogica(conexion_bd)
         admin_interfaz = AdminInterfaz(root, admin_logica)
         admin_interfaz.mostrar_dashboard(1)  # ID de ejemplo para el administrador
