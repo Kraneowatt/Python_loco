@@ -3,14 +3,27 @@ from tkinter import messagebox
 import bcrypt
 from MenuUsuario.Logica.UsuarioLogica import UsuarioLogica
 from MenuUsuario.Interfaz.UsuarioInterfaz import UsuarioInterfaz
+from ConexionBaseDatos.BaseDatos import ConexionBaseDatos
 
 class main_soporte:
     def __init__(self,conexion_base_datos):
 
         pass
 
-    def register(self,name,username,email,password):
-        conexion = ConexionBaseDatos.conectar()
+    def register(self,name,username,email,password,confirm_email,confirm_password):
+        
+        conexion = ConexionBaseDatos.conectar(self)
+
+        if email != confirm_email:
+            messagebox.showerror("Error", "Los correos no coinciden.")
+            return
+        if password != confirm_password:
+            messagebox.showerror("Error", "Las contraseñas no coinciden.")
+            return
+        if len(password) < 6:
+            messagebox.showerror("Error", "La contraseña debe tener al menos 6 caracteres.")
+            return
+
         if conexion:
             cursor = conexion.cursor()
             cursor.execute("SELECT * FROM Usuario WHERE username = ? OR email = ?", (username, email))

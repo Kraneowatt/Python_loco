@@ -15,16 +15,17 @@ class ConexionBaseDatos:
         """
         Establece la conexión con la base de datos.
         """
+        
         try:
-            self.conexion = pyodbc.connect(
-                f"DRIVER={{{self.driver}}};"
-                f"SERVER={self.server};"
-                f"DATABASE={self.database};"
-                "Trusted_Connection=yes;"
+            conexion = pyodbc.connect(
+                'DRIVER={ODBC Driver 17 for SQL Server};'
+                'SERVER=DESKTOP-ERHEOKF\SQLEXPRESS;'
+                'DATABASE=Hola;'
+                'Trusted_Connection=yes;'
             )
-            return self.conexion
+            return conexion
         except Exception as e:
-            messagebox.showerror("Error de Base de Datos", f"Error al conectar: {e}")
+            messagebox.showerror("Database Error", f"Error connecting to database: {e}")
             return None
 
     def cerrar_conexion(self):

@@ -13,11 +13,9 @@ class InvitadoInterfaz:
         """
         Muestra la predicción del clima basada en los datos de entrada.
         """
-        resultado = self.invitado_logica.predecir_clima(datos_entrada)
-        if resultado:
-            self.mostrar_resultado(resultado)
-        else:
-            self.mostrar_error("No se pudo realizar la predicción.")
+        resultado = self.invitado_logica.obtener_prediccion_invitado()
+    
+        messagebox.showinfo("Predicción", resultado)
 
     def mostrar_resultado(self, resultado):
         """
@@ -45,6 +43,8 @@ class InvitadoInterfaz:
 
         label = tk.Label(main_frame, text="Bienvenido como Invitado", font=("Arial", 14, "bold"), bg="#f2f2f2")
         label.pack(pady=20)
+        tk.Label(main_frame, text="Importante: Tienes acceso limitado al sistema general.", font=("Arial", 12), bg="#f2f2f2").pack(pady=10)
+        tk.Label(main_frame, text="Para mas funcionalidades, registrate! Prueba predecir.", font=("Arial", 12), bg="#f2f2f2").pack(pady=10)
 
         btn_prediccion = tk.Button(main_frame, text="Ver Predicción", font=("Arial", 12), bg="#4CAF50", fg="white",
                                    command=lambda: self.mostrar_prediccion([25, 80, 1012, 15]))  # Ejemplo de entrada

@@ -11,8 +11,10 @@ import pandas as pd
 from MainSoporte import main_soporte
 
 class mainlogica:
+
     def __init__(self):
-        pass
+        self.main_soporte=main_soporte
+
 
     def open_register_window(self,root):
         print("Open Register window.")  # Mensaje de depuración para asegurarse de que esta función es llamada.
@@ -56,7 +58,8 @@ class mainlogica:
         # Botón de registro
         btn_register = tk.Button(register_window, text="Registrar", command=
                                  partial(self.register_user(entry_name, entry_username, entry_email, entry_password, entry_confirm_email, entry_confirm_password), bg="#4CAF50", fg="white", font=("Arial", 12)))
-        btn_register.grid(row=7, column=0, columnspan=2, pady=20)
+        
+        btn_register.grid(row=7, column=1, columnspan=2, pady=20)
 
     def open_login_window(self,root):
         global login_window, entry_email, entry_password
@@ -116,19 +119,9 @@ class mainlogica:
         confirm_email = entry_confirm_email.get()
         confirm_password = entry_confirm_password.get()
 
-        # Validaciones básicas
-        if email != confirm_email:
-            messagebox.showerror("Error", "Los correos no coinciden.")
-            return
-        if password != confirm_password:
-            messagebox.showerror("Error", "Las contraseñas no coinciden.")
-            return
-        if len(password) < 6:
-            messagebox.showerror("Error", "La contraseña debe tener al menos 6 caracteres.")
-            return
+        self.main_soporte.register(self,name,username,email,password,confirm_email,confirm_password)
         
-        mainlogica.register(self,name,username,email,password)
-
+        
 
         # Comprobar si el usuario ya existe
 
