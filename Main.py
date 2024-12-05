@@ -7,6 +7,7 @@ from tkinter import messagebox
 
 from MenuUsuario.Logica.UsuarioLogica import UsuarioLogica
 from MenuUsuario.Interfaz.UsuarioInterfaz import UsuarioInterfaz
+from MenuUsuario.Soporte.UsuarioSoporte import UsuarioSoporte
 
 from MenuAdmin.Logica.AdminLogica import AdminLogica
 from MenuAdmin.Interfaz.AdminInterfaz import AdminInterfaz
@@ -36,10 +37,12 @@ def abrir_menu_principal():
 
     def abrir_usuario():
         # Conectar con la base de datos
-        conexion_bd = ConexionBaseDatos('ODBC Driver 17 for SQL Server', 'localhost', 'GoodAirs')
-        usuario_logica = UsuarioLogica(conexion_bd)
+        user_id=1
+        conexion_bd = ConexionBaseDatos('ODBC Driver 17 for SQL Server', 'DESKTOP-ERHEOKF\SQLEXPRESS', 'Hola')
+        Usuario_soporte=UsuarioSoporte(root,conexion_bd)
+        usuario_logica = UsuarioLogica(conexion_bd,root,Usuario_soporte)
         usuario_interfaz = UsuarioInterfaz(root, usuario_logica)
-        usuario_interfaz.mostrar_dashboard(1)  # ID de ejemplo para el usuario
+        usuario_interfaz.mostrar_dashboard(user_id)  # ID de ejemplo para el usuario
 
     def abrir_invitado():
         # Cargar el modelo y dataset para el invitado
