@@ -76,7 +76,7 @@ class main_soporte:
                     if bcrypt.checkpw(password.encode('utf-8'), stored_password.encode('utf-8')):
                         if role_name == 'Usuario':
                             messagebox.showinfo("Login Successful", "¡Bienvenido de nuevo!")
-                            UsuarioInterfaz.open_user_window(user_id)  # Abre la ventana de usuario después del login exitoso
+                            UsuarioInterfaz.mostrar_dashboard(user_id)  # Abre la ventana de usuario después del login exitoso
                         else:
                             messagebox.showwarning("Login Failed", "Contraseña incorrecta.")
                     else:
