@@ -120,7 +120,6 @@ class AdminLogica:
     
         close_button = tk.Button(notiadmin_window, text="Cerrar", command=notiadmin_window.destroy)
         close_button.pack(pady=10)
-        messagebox.showinfo("Notificaciones", "Funcionalidad en desarrollo.")
 
 
 
