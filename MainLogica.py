@@ -4,9 +4,10 @@ from functools import partial
 from datetime import datetime, date, timedelta
 class MainLogica:
 
-    def __init__(self,conexion_bd,MainSoporte):
+    def __init__(self,conexion_bd,MainSoporte,invitado_logica):
         self.conexion_bd=conexion_bd
         self.MainSoporte=MainSoporte
+        self.invitado_logica=invitado_logica
 
     def login_user(self):
         email = entry_email.get().strip()
@@ -106,7 +107,7 @@ class MainLogica:
     # Crear ventana de registro
     
     # Ventana para el usuario invitado
-    def open_guest_window():
+    def open_guest_window(self):
         guest_window = tk.Toplevel()
         guest_window.title("Acceso como Invitado")
         guest_window.geometry("400x300")
@@ -120,7 +121,7 @@ class MainLogica:
                             bg="#f2f2f2")
         date_label.pack(anchor='w')
 
-        prediction_btn = tk.Button(guest_window, text="Predecir", command=show_predictionguest,
+        prediction_btn = tk.Button(guest_window, text="Predecir", command=self.invitado_logica.show_predictionguest,
                                 bg="#4CAF50", fg="white", width=55)
         prediction_btn.pack(anchor='w', pady=5)
         
