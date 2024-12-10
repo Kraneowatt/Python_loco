@@ -75,16 +75,17 @@ class Main:
         admin_logica = AdminLogica(conexion_bd,admin_soporte)
         admin_interfaz = AdminInterfaz(admin_logica)
 
+        invitado_logica = InvitadoLogica(r"C:/Users/HP OMEN/Desktop/GoodAirs/Python_loco/datasets/UnBuenDataset.csv","C:/Users/HP OMEN/Desktop/GoodAirs/Python_loco/modelos/modelo_clima_dia_siguiente.keras")
+
         Usuario_soporte=UsuarioSoporte(conexion_bd)
-        usuario_logica = UsuarioLogica(conexion_bd,Usuario_soporte)
+        usuario_logica = UsuarioLogica(conexion_bd,Usuario_soporte,r"C:/Users/HP OMEN/Desktop/GoodAirs/Python_loco/datasets/UnBuenDataset.csv","C:/Users/HP OMEN/Desktop/GoodAirs/Python_loco/modelos/modelo_clima_dia_siguiente.keras")
         usuario_interfaz = UsuarioInterfaz( usuario_logica)
 
 
-        invitado_logica = InvitadoLogica(r"C:/Users/HP OMEN/Desktop/GoodAirs/Python_loco/datasets/UnBuenDataset.csv", 
-                                         "C:/Users/HP OMEN/Desktop/GoodAirs/Python_loco/modelos/modelo_clima_dia_siguiente.keras")
+        
         
         self.MainSoporte=main_soporte(conexion_bd,admin_interfaz,usuario_interfaz)
-        self.MainLogica = MainLogica(conexion_bd,self.MainSoporte,self.invitado_logica)
+        self.MainLogica = MainLogica(conexion_bd,self.MainSoporte,invitado_logica)
     
     def abrir_menu_principal(self):
         root = tk.Tk()

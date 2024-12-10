@@ -34,6 +34,11 @@ class UsuarioInterfaz:
         date_label.pack(anchor='w')
 
         # Botones para las funciones del usuario
+
+        btn_prediccion = tk.Button(main_frame, text="Ver Predicción", font=("Arial", 12), bg="#4CAF50", fg="white",
+                                   command=self.mostrar_prediccion([25, 80, 1012, 15]))  # Ejemplo de entrada
+        btn_prediccion.pack(pady=10)
+
         btn_trivia = tk.Button(main_frame, text="Trivia", font=("Arial", 12), bg="#4CAF50", fg="white",
                                   command=self.usuario_logica.trivia)
         btn_trivia.pack(pady=10)

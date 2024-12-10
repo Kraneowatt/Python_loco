@@ -121,7 +121,7 @@ class MainLogica:
                             bg="#f2f2f2")
         date_label.pack(anchor='w')
 
-        prediction_btn = tk.Button(guest_window, text="Predecir", command=self.invitado_logica.show_predictionguest,
+        prediction_btn = tk.Button(guest_window, text="Predecir", command=self.invitado_logica.obtener_prediccion_invitado,
                                 bg="#4CAF50", fg="white", width=55)
         prediction_btn.pack(anchor='w', pady=5)
         
