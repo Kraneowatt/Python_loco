@@ -62,7 +62,7 @@ class main_soporte:
                     FROM Usuario u
                     JOIN RolDeUsuario ru ON u.idUsuario = ru.idUsuario
                     JOIN Rol r ON ru.idRol = r.idRol
-                    WHERE u.email = ? and u.password=?
+                    WHERE u.email = ? and u.contraseña=?
                 """, (email,password))
                 
                 user = cursor.fetchone()
