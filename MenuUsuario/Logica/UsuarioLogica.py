@@ -340,7 +340,7 @@ class UsuarioLogica:
         
         return clima, temperatura, humedad, prediccion[0]
 
-    def obtener_prediccion_invitado(self):
+    def mostrar_prediccion(self):
         """
         Obtiene y muestra la predicción del clima para el invitado.
         """
