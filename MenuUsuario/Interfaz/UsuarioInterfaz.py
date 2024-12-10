@@ -13,6 +13,7 @@ class UsuarioInterfaz:
         """
         Muestra el panel principal del usuario.
         """
+        
         usuario_window = tk.Toplevel()
         usuario_window.title("Good Airs - Usuario")
         usuario_window.geometry("800x600")
@@ -36,7 +37,7 @@ class UsuarioInterfaz:
         # Botones para las funciones del usuario
 
         btn_prediccion = tk.Button(main_frame, text="Ver Predicción", font=("Arial", 12), bg="#4CAF50", fg="white",
-                                   command=self.mostrar_prediccion())  # Ejemplo de entrada
+                                   command=self.usuario_logica.mostrar_prediccion)  # Ejemplo de entrada
         btn_prediccion.pack(pady=10)
 
         btn_trivia = tk.Button(main_frame, text="Trivia", font=("Arial", 12), bg="#4CAF50", fg="white",
@@ -47,7 +48,7 @@ class UsuarioInterfaz:
                                           command=partial(self.usuario_logica.open_notifications,user_id))
         btn_notifiacion.pack(pady=10)
 
-        btn_ajustes = tk.Button(main_frame, text="ajustes ", font=("Arial", 12), bg="#2196F3", fg="white",command=self.usuario_logica.open_settings(user_id))
+        btn_ajustes = tk.Button(main_frame, text="ajustes ", font=("Arial", 12), bg="#2196F3", fg="white",command=partial(self.usuario_logica.open_settings,user_id))
         btn_ajustes.pack(pady=10)
 
         btn_realizar_encuesta = tk.Button(main_frame, text="realizar encuesta diaria ", font=("Arial", 12), bg="#2196F3", fg="white",command=partial(self.usuario_logica.realizar_encuesta,user_id))

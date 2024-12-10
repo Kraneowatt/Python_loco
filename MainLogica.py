@@ -107,7 +107,8 @@ class MainLogica:
     # Crear ventana de registro
     
     # Ventana para el usuario invitado
-    def open_guest_window(self):
+    def open_guest_window(self,root):
+        root.withdraw()
         guest_window = tk.Toplevel()
         guest_window.title("Acceso como Invitado")
         guest_window.geometry("400x300")

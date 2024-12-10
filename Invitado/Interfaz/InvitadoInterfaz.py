@@ -33,6 +33,7 @@ class InvitadoInterfaz:
         """
         Muestra la ventana principal de invitado.
         """
+        root.withdraw()
         invitado_window = tk.Toplevel(self.root)
         invitado_window.title("Good Airs - Invitado")
         invitado_window.geometry("600x400")

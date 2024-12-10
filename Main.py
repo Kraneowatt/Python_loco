@@ -114,7 +114,7 @@ class Main:
         guest_label = tk.Label(guest_frame, text="O bien.. entre como invitado.", bg="#f2f2f2", font=("Arial", 12))
         guest_label.grid(row=0, column=0, padx=5)
 
-        btn_guest = tk.Button(guest_frame, text="Invitado", command=self.MainLogica.open_guest_window, bg="#FF9800", fg="white", font=("Arial", 12))
+        btn_guest = tk.Button(guest_frame, text="Invitado", command=partial(self.MainLogica.open_guest_window,root), bg="#FF9800", fg="white", font=("Arial", 12))
         btn_guest.grid(row=0, column=1, padx=5)
 
         # Botón de información
