@@ -15,7 +15,7 @@ class AdminInterfaz:
         """
         Crea y muestra el panel principal del administrador.
         """
-        admin_window = tk.Toplevel(self.root)
+        admin_window = tk.Toplevel()
         admin_window.title("Good Airs - Admin Dashboard")
         admin_window.geometry("800x600")
         admin_window.config(bg="#e6e6e6")
