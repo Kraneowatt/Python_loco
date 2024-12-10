@@ -14,7 +14,7 @@ class UsuarioInterfaz:
         """
         Muestra el panel principal del usuario.
         """
-        usuario_window = tk.Toplevel(self.root)
+        usuario_window = tk.Toplevel()
         usuario_window.title("Good Airs - Usuario")
         usuario_window.geometry("800x600")
         usuario_window.config(bg="#f2f2f2")
