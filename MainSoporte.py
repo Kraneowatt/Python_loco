@@ -64,8 +64,8 @@ class main_soporte:
                     FROM Usuario u
                     JOIN RolDeUsuario ru ON u.idUsuario = ru.idUsuario
                     JOIN Rol r ON ru.idRol = r.idRol
-                    WHERE u.email = ? and u.contraseña=?
-                """, (email,password))
+                    WHERE u.email = ? 
+                """, (email,))
                 
                 user = cursor.fetchone()
                 
@@ -75,7 +75,7 @@ class main_soporte:
                         messagebox.showinfo("Login Successful", "¡Bienvenido Administrador!")
                         self.admin_interfaz.mostrar_dashboard(user_id)  # Abre la ventana de administración
                         
-                    if bcrypt.checkpw(password.encode('utf-8'), stored_password.encode('utf-8')):
+                    if bcrypt.checkpwd(password.encode('utf-8'), stored_password.encode('utf-8')):
                         if role_name == 'Usuario':
                             messagebox.showinfo("Login Successful", "¡Bienvenido de nuevo!")
                             self.usuario_interfaz.mostrar_dashboard(user_id)  # Abre la ventana de usuario después del login exitoso
