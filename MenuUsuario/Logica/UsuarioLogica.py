@@ -2,6 +2,7 @@ from tkinter import messagebox
 import tkinter as tk
 from tkinter import messagebox
 from datetime import datetime, date, timedelta
+import numpy as np
 import pandas as pd
 from tkinter import ttk
 from functools import partial
