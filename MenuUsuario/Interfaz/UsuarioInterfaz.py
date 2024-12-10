@@ -13,7 +13,7 @@ class UsuarioInterfaz:
         """
         Muestra el panel principal del usuario.
         """
-        
+
         usuario_window = tk.Toplevel()
         usuario_window.title("Good Airs - Usuario")
         usuario_window.geometry("800x600")
@@ -55,5 +55,5 @@ class UsuarioInterfaz:
         btn_realizar_encuesta.pack(pady=10)
 
         btn_logout = tk.Button(main_frame, text="Cerrar Sesión", font=("Arial", 12), bg="#f44336", fg="white",
-                               command=usuario_window.destroy)
+                               command=partial(self.usuario_logica.cerrar_sesion,usuario_window))
         btn_logout.pack(pady=10)

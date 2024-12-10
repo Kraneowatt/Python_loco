@@ -90,6 +90,7 @@ class MainLogica:
         # Botón de registro
         btn_register = tk.Button(register_window, text="Registrar", command=partial(self.register_user,entry_name, entry_username, entry_email, entry_password, entry_confirm_email, entry_confirm_password), bg="#4CAF50", fg="white", font=("Arial", 12))
         btn_register.grid(row=7, column=0, columnspan=2, pady=20)
+        
 
 
     # Función para registrar el usuario
@@ -125,6 +126,9 @@ class MainLogica:
         prediction_btn = tk.Button(guest_window, text="Predecir", command=self.invitado_logica.obtener_prediccion_invitado,
                                 bg="#4CAF50", fg="white", width=55)
         prediction_btn.pack(anchor='w', pady=5)
+        btn_logout = tk.Button(guest_window, text="Cerrar Sesión", font=("Arial", 12), bg="#f44336", fg="white",
+                               command=partial(self.invitado_logica.cerrar_sesion,guest_window))
+        btn_logout.pack(pady=10)
         
         
 

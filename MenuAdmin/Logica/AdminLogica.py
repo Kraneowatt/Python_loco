@@ -7,6 +7,7 @@ from functools import partial
 from tkinter import ttk
 from tkinter import filedialog, messagebox, simpledialog
 import subprocess
+from Main import Main
 
 class AdminLogica:
     """
@@ -302,3 +303,8 @@ class AdminLogica:
             finally:
                 progress.stop()
                 progress.destroy()
+
+    def cerrar_sesion(self,root):
+            root.destroy
+            main=Main()
+            main.abrir_menu_principal()

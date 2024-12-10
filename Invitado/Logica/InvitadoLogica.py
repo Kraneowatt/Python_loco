@@ -2,7 +2,7 @@ from tkinter import messagebox
 import numpy as np
 import pandas as pd
 from tensorflow.keras.models import load_model
-
+from Main import Main
 class InvitadoLogica:
     """
     Clase para manejar la lógica de predicción y datos del invitado.
@@ -86,3 +86,8 @@ class InvitadoLogica:
         )
 
         return detalles
+
+    def cerrar_sesion(self,root):
+            root.destroy
+            main=Main()
+            main.abrir_menu_principal()

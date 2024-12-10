@@ -52,13 +52,14 @@ class AdminInterfaz:
 
         btn_logout = tk.Button(main_frame, text="Cerrar Sesión", 
                                font=("Arial", 12), bg="#f44336", fg="white",
-                               command=admin_window.destroy)
+                               command=partial(self.admin_logica.cerrar_sesion,main_frame))
         btn_logout.pack(pady=10)
 
         # Información adicional
         version_label = tk.Label(main_frame, text="Versión 1.2", 
                                  font=("Arial", 10), bg="#f2f2f2")
         version_label.pack(side='bottom', pady=10)
+        
 
 
             

@@ -7,6 +7,7 @@ import pandas as pd
 from tkinter import ttk
 from functools import partial
 from tensorflow.keras.models import load_model
+from Main import Main
 class UsuarioLogica:
     """
     Clase para manejar la lógica del usuario.
@@ -374,3 +375,8 @@ class UsuarioLogica:
             f"Viento máximo: {entrada['vientomax_intensidad']:.2f}\n"
             f"Viento medio: {entrada['vientomed_intensidad']:.2f}"
         )
+
+        def cerrar_sesion(self,root):
+            root.destroy
+            main=Main()
+            main.abrir_menu_principal()
