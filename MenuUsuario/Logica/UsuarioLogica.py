@@ -67,7 +67,7 @@ class UsuarioLogica:
                 precision = int(precision_var.get())
                 interaccion = int(interaccion_var.get())
                 comentario = comentario_var.get()
-                self.UsuarioSoporte.hacer_encuesta(user_id,eficacia,precision,interaccion,comentario)
+                self.UsuarioSoporte.hacer_encuesta(user_id,eficacia,precision,interaccion,comentario,root)
             except Exception as e:
                 messagebox.showerror("Error", f"Error al registrar la encuesta: {e}")
                 tk.Button(root, text="Enviar Encuesta", command=self.submit_survey).pack(pady=10)
