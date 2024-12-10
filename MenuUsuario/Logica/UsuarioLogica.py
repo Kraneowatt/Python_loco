@@ -5,6 +5,7 @@ from datetime import datetime, date, timedelta
 import pandas as pd
 from tkinter import ttk
 from functools import partial
+from tensorflow.keras.models import load_model
 class UsuarioLogica:
     """
     Clase para manejar la lógica del usuario.
