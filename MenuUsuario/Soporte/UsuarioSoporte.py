@@ -7,9 +7,8 @@ class UsuarioSoporte:
     """
     Clase de soporte para tareas auxiliares del usuario.
     """
-    def __init__(self, root,conexion_bd):
+    def __init__(self, conexion_bd):
         self.conexion_bd = conexion_bd
-        self.root = root
         
     @staticmethod
     def validar_encuesta(eficacia, precision, interaccion):

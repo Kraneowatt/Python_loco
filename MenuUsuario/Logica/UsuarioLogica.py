@@ -224,7 +224,7 @@ class UsuarioLogica:
         entry_new_name.pack(pady=5)
 
         tk.Button(settings_frame, text="Cambiar Nombre", 
-                 command=partial(self.change_name,user_id,entry_new_name), bg="#4CAF50", fg="white", width=20).pack(pady=5)
+                 command=partial(self.change_name,user_id,entry_new_name,settings_window), bg="#4CAF50", fg="white", width=20).pack(pady=5)
 
         # Sección de cambio de nombre de usuario
         tk.Label(settings_frame, text="\nCambiar Nombre de Usuario", 
@@ -237,7 +237,7 @@ class UsuarioLogica:
         
 
         tk.Button(settings_frame, text="Cambiar Username", 
-                 command=partial(self.change_username,user_id,entry_new_username), bg="#4CAF50", fg="white", width=20).pack(pady=5)
+                 command=partial(self.change_username,user_id,entry_new_username,settings_window), bg="#4CAF50", fg="white", width=20).pack(pady=5)
 
         # Sección de cambio de contraseña
         tk.Label(settings_frame, text="\nCambiar Contraseña", 
@@ -257,26 +257,28 @@ class UsuarioLogica:
 
 
         tk.Button(settings_frame, text="Cambiar Contraseña", 
-                 command=partial(self.change_password,user_id,entry_current_password,entry_new_password,entry_confirm_password), bg="#4CAF50", fg="white", width=20).pack(pady=5)
+                 command=partial(self.change_password,user_id,entry_current_password,entry_new_password,entry_confirm_password,settings_window), bg="#4CAF50", fg="white", width=20).pack(pady=5)
 
         # Botón de volver
         tk.Button(settings_frame, text="Volver",
                  command=settings_window.destroy,
                  bg="#9E9E9E", fg="white", width=20).pack(pady=10)
 
-    def change_name(self,user_id,entry_new_name):
+    def change_name(self,user_id,entry_new_name,root):
         new_name = entry_new_name.get().strip()
         if new_name:
             if self.UsuarioSoporte.cambiar_nombre_usuario(user_id, new_name):
+                root.destroy()
                 self.open_settings()  # Reabrir la ventana de ajustes actualizada
 
-    def change_username(self,user_id,entry_new_username):
+    def change_username(self,user_id,entry_new_username,root):
         new_username = entry_new_username.get().strip()
         if new_username:
             if self.UsuarioSoporte.cambiar_username(user_id, new_username):
+                root.destroy()
                 self.open_settings()
     
-    def change_password(self,user_id,entry_current_password,entry_new_password,entry_confirm_password):
+    def change_password(self,user_id,entry_current_password,entry_new_password,entry_confirm_password,root):
             current_password = entry_current_password.get().strip()
             new_password = entry_new_password.get().strip()
             confirm_password = entry_confirm_password.get().strip()
@@ -290,7 +292,7 @@ class UsuarioLogica:
                 return
 
             if self.UsuarioSoporte.cambiar_contraseña(user_id, current_password, new_password):
-
+                root.destroy()
                 messagebox.showinfo("Éxito", "Se recomienda volver a iniciar sesión.")
     
 
