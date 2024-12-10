@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 from functools import partial
+from datetime import datetime, date, timedelta
 class MainLogica:
 
     def __init__(self,conexion_bd,MainSoporte):
@@ -106,7 +107,7 @@ class MainLogica:
     
     # Ventana para el usuario invitado
     def open_guest_window():
-        guest_window = tk.Toplevel(root)
+        guest_window = tk.Toplevel()
         guest_window.title("Acceso como Invitado")
         guest_window.geometry("400x300")
         guest_window.config(bg="#f2f2f2")

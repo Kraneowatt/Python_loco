@@ -81,7 +81,7 @@ class AdminLogica:
                         ]
                     button_functions = [
                         self.consultar_dataset,
-                        self.insertar_nuevos_datos,
+                        partial(self.insertar_nuevos_datos,input_fields),
                         self.ver_dataset_normalizado,
                         self.entrenar_red_neuronal
                         ]
