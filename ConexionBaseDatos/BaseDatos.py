@@ -15,7 +15,7 @@ class ConexionBaseDatos:
         """
         Establece la conexión con la base de datos.
         """
-        
+
         try:
             conexion = pyodbc.connect(
                 'DRIVER={ODBC Driver 17 for SQL Server};'

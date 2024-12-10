@@ -7,12 +7,11 @@ from ConexionBaseDatos.BaseDatos import ConexionBaseDatos
 
 class main_soporte:
     def __init__(self,conexion_base_datos):
-
-        pass
+        self.conexion_base_datos = conexion_base_datos
 
     def register(self,name,username,email,password,confirm_email,confirm_password):
         
-        conexion = ConexionBaseDatos.conectar(self)
+        conn =self.conexion_base_datos.conectar()
 
         if email != confirm_email:
             messagebox.showerror("Error", "Los correos no coinciden.")
@@ -24,13 +23,13 @@ class main_soporte:
             messagebox.showerror("Error", "La contraseña debe tener al menos 6 caracteres.")
             return
 
-        if conexion:
-            cursor = conexion.cursor()
+        if conn:
+            cursor = conn.cursor()
             cursor.execute("SELECT * FROM Usuario WHERE username = ? OR email = ?", (username, email))
             existing_user = cursor.fetchone()
             if existing_user:
                 messagebox.showerror("Error", "El usuario ya existe.")
-                conexion.close()
+                conn.close()
                 return
             
             hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
@@ -42,17 +41,17 @@ class main_soporte:
                                         @p_email = ?, 
                                         @p_contraseña = ?
                 """, (name, username, email, hashed_password.decode('utf-8')))
-                conexion.commit()
+                conn.commit()
                 messagebox.showinfo("Éxito", "¡Usuario registrado con éxito!")
             except Exception as e:
                 messagebox.showerror("Error", f"Error al registrar el usuario: {e}")
             finally:
-                conexion.close()
+                conn.close()
 
     def login_user(self,email,password):
 
 
-        conn = ConexionBaseDatos.conectar()
+        conn = self.conexion_base_datos.conectar()
         if conn:
             cursor = conn.cursor()
             try:

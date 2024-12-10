@@ -18,10 +18,11 @@ from Invitado.Interfaz.InvitadoInterfaz import InvitadoInterfaz
 
 from ConexionBaseDatos.BaseDatos import ConexionBaseDatos
 
+from MainLogica import MainLogica
+from MainSoporte import main_soporte
+from functools import partial
+"""
 def abrir_menu_principal():
-    """
-    Función para abrir la ventana principal y seleccionar el tipo de usuario.
-    """
     root = tk.Tk()
     root.title("Good Airs")
     root.geometry("400x300")
@@ -66,3 +67,53 @@ def abrir_menu_principal():
 
 if __name__ == "__main__":
     abrir_menu_principal()
+"""
+class Main:
+    def __init__(self):
+        conexion_bd = ConexionBaseDatos('ODBC Driver 17 for SQL Server', 'DESKTOP-ERHEOKF\SQLEXPRESS', 'Hola')
+        self.MainSoporte=main_soporte(conexion_bd)
+        self.MainLogica = MainLogica(conexion_bd,self.MainSoporte)
+    
+    def abrir_menu_principal(self):
+        root = tk.Tk()
+        root.title("Good Airs!")
+        root.geometry("400x300")
+        root.config(bg="#f2f2f2")  # Establecer el color de fondo para la ventana principal
+
+        # Pantalla de bienvenida
+        welcome_label = tk.Label(root, text="Bienvenido a Good Airs!\nInicie o Registrese para continuar!", font=("Arial", 14, "bold"), bg="#f2f2f2")
+        welcome_label.grid(row=0, column=0, columnspan=2, pady=20)
+
+        # Botones de acción
+        btn_register = tk.Button(root, text="Registrarse", command=partial(self.MainLogica.open_register_window,root), bg="#4CAF50", fg="white", font=("Arial", 12))
+        btn_register.grid(row=1, column=0, pady=10)
+
+        btn_login = tk.Button(root, text="Iniciar Sesión", command=partial(self.MainLogica.open_login_window,root), bg="#2196F3", fg="white", font=("Arial", 12))
+        btn_login.grid(row=2, column=0, pady=10)
+
+        btn_exit = tk.Button(root, text="Salir", command=root.quit, bg="#f44336", fg="white", font=("Arial", 12))
+        btn_exit.grid(row=3, column=0, pady=10)
+
+        # Botones de invitado
+        guest_frame = tk.Frame(root, bg="#f2f2f2")
+        guest_frame.grid(row=4, column=0, pady=10)
+
+        guest_label = tk.Label(guest_frame, text="O bien.. entre como invitado.", bg="#f2f2f2", font=("Arial", 12))
+        guest_label.grid(row=0, column=0, padx=5)
+
+        btn_guest = tk.Button(guest_frame, text="Invitado", command=self.MainLogica.open_guest_window, bg="#FF9800", fg="white", font=("Arial", 12))
+        btn_guest.grid(row=0, column=1, padx=5)
+
+        # Botón de información
+        def show_info():
+            messagebox.showinfo("Información", "Como invitado, tienes acceso limitado. No puedes dar feedback, pero puedes predecir.")
+
+        btn_info = tk.Button(root, text="?", command=show_info, bg="#9E9E9E", fg="white", font=("Arial", 12))
+        btn_info.place(x=20, y=20)
+
+        # Ejecutar la aplicación
+        root.mainloop()
+
+if __name__ == "__main__":
+    main=Main()
+    main.abrir_menu_principal()
