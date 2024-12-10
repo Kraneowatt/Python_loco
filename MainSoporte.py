@@ -57,9 +57,11 @@ class main_soporte:
             try:
                 # Modificada la consulta para obtener todos los datos necesarios del usuario
                 cursor.execute("""
-                    SELECT U.idUsuario, U.nombre, U.contraseña 
-                    FROM Usuario U 
-                    WHERE U.email = ?
+                    SELECT u.idUsuario, u.contraseña, r.nombre 
+                    FROM Usuario u
+                    JOIN RolDeUsuario ru ON u.idUsuario = ru.idUsuario
+                    JOIN Rol r ON ru.idRol = r.idRol
+                    WHERE u.email = ?
                 """, (email,))
                 
                 user = cursor.fetchone()
@@ -74,3 +76,6 @@ class main_soporte:
                 messagebox.showerror("Error", f"Error durante el login: {e}")
             finally:
                 conn.close()
+
+
+

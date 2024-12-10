@@ -11,36 +11,7 @@ class MainLogica:
         email = entry_email.get().strip()
         password = entry_password.get().strip()
 
-        conn =self.conexion_bd.conectar()
-        if conn:
-            cursor = conn.cursor()
-            cursor.execute("""
-                SELECT u.idUsuario, u.contraseña, r.nombre 
-                FROM Usuario u
-                JOIN RolDeUsuario ru ON u.idUsuario = ru.idUsuario
-                JOIN Rol r ON ru.idRol = r.idRol
-                WHERE u.email = ?
-            """, (email,))
-            user = cursor.fetchone()
-
-            if user:
-                user_id, stored_password, role_name = user[0], user[1].strip(), user[2]
-                if role_name == 'Administrador':
-                    messagebox.showinfo("Login Successful", "¡Bienvenido Administrador!")
-                    open_admin_window(user_id)  # Abre la ventana de administración
-                    
-                if bcrypt.checkpw(password.encode('utf-8'), stored_password.encode('utf-8')):
-                    if role_name == 'Usuario':
-                        messagebox.showinfo("Login Successful", "¡Bienvenido de nuevo!")
-                        open_user_window(user_id)  # Abre la ventana de usuario después del login exitoso
-                    else:
-                        messagebox.showwarning("Login Failed", "Contraseña incorrecta.")
-            else:
-                messagebox.showwarning("Login Failed", "No se encontró un usuario con este correo.")
-
-            conn.close()
-        else:
-            messagebox.showerror("Error", "No se pudo conectar a la base de datos.")
+        self.MainSoporte.login_user(email,password)
 
 
     # Función para abrir la ventana de inicio de sesión
