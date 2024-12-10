@@ -71,14 +71,14 @@ if __name__ == "__main__":
 class Main:
     def __init__(self):
         conexion_bd = ConexionBaseDatos('ODBC Driver 17 for SQL Server', 'DESKTOP-ERHEOKF\SQLEXPRESS', 'Hola')
-        self.root=self.abrir_menu_principal()
+        self.root=0
         admin_soporte=AdminSoporte(conexion_bd)
         admin_logica = AdminLogica(conexion_bd,admin_soporte)
-        admin_interfaz = AdminInterfaz(self.root, admin_logica)
+        admin_interfaz = AdminInterfaz(admin_logica)
 
-        Usuario_soporte=UsuarioSoporte(self.root,conexion_bd)
-        usuario_logica = UsuarioLogica(conexion_bd,self.root,Usuario_soporte)
-        usuario_interfaz = UsuarioInterfaz(self.root, usuario_logica)
+        Usuario_soporte=UsuarioSoporte(conexion_bd)
+        usuario_logica = UsuarioLogica(conexion_bd,Usuario_soporte)
+        usuario_interfaz = UsuarioInterfaz( usuario_logica)
 
         self.MainSoporte=main_soporte(conexion_bd,admin_interfaz,usuario_interfaz)
         self.MainLogica = MainLogica(conexion_bd,self.MainSoporte)
@@ -123,7 +123,6 @@ class Main:
         # Ejecutar la aplicación
         root.mainloop()
 
-        return root
-
 if __name__ == "__main__":
     main=Main()
+    main.abrir_menu_principal()

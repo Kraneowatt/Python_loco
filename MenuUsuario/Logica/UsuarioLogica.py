@@ -9,9 +9,8 @@ class UsuarioLogica:
     """
     Clase para manejar la lógica del usuario.
     """
-    def __init__(self, conexion_base_datos,root,UsuarioSoporte):
+    def __init__(self, conexion_base_datos,UsuarioSoporte):
         self.conexion_base_datos = conexion_base_datos
-        self.root=root
         self.UsuarioSoporte=UsuarioSoporte
 
     def obtener_nombre_usuario(self, user_id):
@@ -40,7 +39,7 @@ class UsuarioLogica:
 
     def realizar_encuesta(self,user_id):
         if (self.UsuarioSoporte.verificar_encuesta(user_id)):
-            survey_window = tk.Toplevel(self.root)
+            survey_window = tk.Toplevel()
             survey_window.title("Encuesta Diaria")
             survey_window.geometry("400x300")
             
@@ -57,27 +56,27 @@ class UsuarioLogica:
             tk.Entry(survey_window, textvariable=interaccion_var).pack(pady=5)
             tk.Label(survey_window, text="Comentario:", font=("Arial", 10)).pack(pady=5)
             tk.Entry(survey_window, textvariable=comentario_var).pack(pady=5)
-            tk.Button(survey_window, text="Enviar Encuesta", command=partial(self.submit_survey,eficacia_var,precision_var,interaccion_var,comentario_var,user_id)).pack(pady=10)
+            tk.Button(survey_window, text="Enviar Encuesta", command=partial(self.submit_survey,eficacia_var,precision_var,interaccion_var,comentario_var,user_id,survey_window)).pack(pady=10)
 
         
         
 
-    def submit_survey(self,eficacia_var,precision_var,interaccion_var,comentario_var,user_id):
+    def submit_survey(self,eficacia_var,precision_var,interaccion_var,comentario_var,user_id,root):
             try:
                 eficacia = int(eficacia_var.get())
                 precision = int(precision_var.get())
                 interaccion = int(interaccion_var.get())
                 comentario = comentario_var.get()
-                self.UsuarioSoporte.hacer_encuesta(user_id,eficacia,precision,interaccion,comentario,self.root)
+                self.UsuarioSoporte.hacer_encuesta(user_id,eficacia,precision,interaccion,comentario)
             except Exception as e:
                 messagebox.showerror("Error", f"Error al registrar la encuesta: {e}")
-                tk.Button(self.root, text="Enviar Encuesta", command=self.submit_survey).pack(pady=10)
+                tk.Button(root, text="Enviar Encuesta", command=self.submit_survey).pack(pady=10)
 
 
 #Trivia 
 
     def trivia(self):
-        trivia_window = tk.Toplevel(self.root)
+        trivia_window = tk.Toplevel()
         trivia_window.title("Trivia")
         trivia_window.geometry("400x300")
         trivia_window.config(bg="#f2f2f2")  # Fondo color claro
@@ -115,7 +114,7 @@ class UsuarioLogica:
         file_path = r"C:\Users\proje\Desktop\GoodAirs\GestionAdmin\DatasetAdminGest.csv"
         try:
             df = pd.read_csv(file_path, sep=',', encoding='utf-8')
-            dataset_window = tk.Toplevel(self.root)
+            dataset_window = tk.Toplevel()
             dataset_window.title("Consultar Dataset Público")
             dataset_window.geometry("1200x600")  # Ventana más ancha para mejor visualización
             dataset_window.config(bg="#f2f2f2")
@@ -190,7 +189,7 @@ class UsuarioLogica:
         
 #Notificaciones
     def open_notifications(self,user_id):
-        notif_window = tk.Toplevel(self.root)
+        notif_window = tk.Toplevel()
         notif_window.title("Notificaciones")
         notif_window.geometry("400x300")
         tk.Label(notif_window, text="Ventana de Notificaciones", font=("Arial", 12)).pack()
@@ -201,7 +200,7 @@ class UsuarioLogica:
 #Ajustes
 
     def open_settings(self,user_id):
-        settings_window = tk.Toplevel(self.root)
+        settings_window = tk.Toplevel()
         settings_window.title("Ajustes")
         settings_window.geometry("500x700")  # Aumentado el tamaño para los nuevos campos
         settings_window.config(bg="#f2f2f2")
@@ -269,14 +268,12 @@ class UsuarioLogica:
         new_name = entry_new_name.get().strip()
         if new_name:
             if self.UsuarioSoporte.cambiar_nombre_usuario(user_id, new_name):
-                self.root.destroy()
                 self.open_settings()  # Reabrir la ventana de ajustes actualizada
 
     def change_username(self,user_id,entry_new_username):
         new_username = entry_new_username.get().strip()
         if new_username:
             if self.UsuarioSoporte.cambiar_username(user_id, new_username):
-                self.root.destroy()
                 self.open_settings()
     
     def change_password(self,user_id,entry_current_password,entry_new_password,entry_confirm_password):
@@ -293,7 +290,7 @@ class UsuarioLogica:
                 return
 
             if self.UsuarioSoporte.cambiar_contraseña(user_id, current_password, new_password):
-                self.root.destroy()
+
                 messagebox.showinfo("Éxito", "Se recomienda volver a iniciar sesión.")
     
 

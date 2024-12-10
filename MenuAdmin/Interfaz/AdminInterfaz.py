@@ -6,8 +6,7 @@ class AdminInterfaz:
     """
     Clase para manejar la interfaz gráfica del administrador.
     """
-    def __init__(self, root, admin_logica):
-        self.root = root
+    def __init__(self,admin_logica):
         self.admin_logica = admin_logica
     
 
@@ -43,12 +42,12 @@ class AdminInterfaz:
         # Botones
         btn_gestion = tk.Button(main_frame, text="Gestionar Dataset", 
                                 font=("Arial", 12), bg="#4CAF50", fg="white",
-                                command=partial(self.admin_logica.abrir_gestion_dataset,self.root))
+                                command=partial(self.admin_logica.abrir_gestion_dataset))
         btn_gestion.pack(pady=10)
 
         btn_notificaciones = tk.Button(main_frame, text="Notificaciones", 
                                        font=("Arial", 12), bg="#2196F3", fg="white",
-                                       command=partial(self.admin_logica.abrir_notificaciones,self.root))
+                                       command=partial(self.admin_logica.abrir_notificaciones))
         btn_notificaciones.pack(pady=10)
 
         btn_logout = tk.Button(main_frame, text="Cerrar Sesión", 

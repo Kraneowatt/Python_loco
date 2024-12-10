@@ -6,8 +6,7 @@ class UsuarioInterfaz:
     """
     Clase para manejar la interfaz gráfica del usuario registrado.
     """
-    def __init__(self, root, usuario_logica):
-        self.root = root
+    def __init__(self, usuario_logica):
         self.usuario_logica = usuario_logica
 
     def mostrar_dashboard(self, user_id):

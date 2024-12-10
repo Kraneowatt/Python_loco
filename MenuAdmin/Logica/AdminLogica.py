@@ -39,8 +39,8 @@ class AdminLogica:
         """
         return datetime.now().strftime("%d/%m/%Y")
 
-    def abrir_gestion_dataset(self,root):
-        gestion_window = tk.Toplevel(root)
+    def abrir_gestion_dataset(self):
+        gestion_window = tk.Toplevel()
         gestion_window.title("Good Airs - Dataset Dashboard")
         gestion_window.geometry("800x600")
         gestion_window.config(bg="#e6e6e6")
@@ -89,8 +89,8 @@ class AdminLogica:
                         button = tk.Button(main_frame, text=button_text, bg=color, font=("Arial", 12), command=button_functions[idx-11])
                         button.grid(row=idx, column=0, columnspan=2, pady=10, padx=10, sticky="ew")
 
-    def abrir_notificaciones(self,root):
-        notiadmin_window = tk.Toplevel(root)
+    def abrir_notificaciones(self):
+        notiadmin_window = tk.Toplevel()
         notiadmin_window.title("Good Airs - Dataset Dashboard")
         notiadmin_window.geometry("800x600")
         notiadmin_window.config(bg="#e6e6e6")
@@ -289,8 +289,8 @@ class AdminLogica:
             except Exception as e:
                 messagebox.showerror("Error", f"No se pudo insertar el dato: {e}")
         
-    def entrenar_red_neuronal(self,root):
-            progress = ttk.Progressbar(root, orient="horizontal", length=300, mode="indeterminate")
+    def entrenar_red_neuronal(self):
+            progress = ttk.Progressbar( rient="horizontal", length=300, mode="indeterminate")
             progress.grid(row=0, column=0, pady=10, padx=10)
             progress.start()
                 
