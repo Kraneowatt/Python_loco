@@ -1,8 +1,9 @@
 from ConexionBaseDatos.BaseDatos import ConexionBaseDatos
 from tkinter import messagebox
 import bcrypt
-from MenuUsuario.Logica.UsuarioLogica import UsuarioLogica
 from MenuUsuario.Interfaz.UsuarioInterfaz import UsuarioInterfaz
+
+from MenuAdmin.Interfaz.AdminInterfaz import AdminInterfaz
 from ConexionBaseDatos.BaseDatos import ConexionBaseDatos
 
 class main_soporte:
@@ -57,21 +58,27 @@ class main_soporte:
             try:
                 # Modificada la consulta para obtener todos los datos necesarios del usuario
                 cursor.execute("""
-                    SELECT u.idUsuario, u.contraseña, r.nombre 
+                    SELECT u.idUsuario, u.contraseña, r.nombre, r.idRol
                     FROM Usuario u
                     JOIN RolDeUsuario ru ON u.idUsuario = ru.idUsuario
                     JOIN Rol r ON ru.idRol = r.idRol
-                    WHERE u.email = ?
-                """, (email,))
+                    WHERE u.email = ? and u.password=?
+                """, (email,password))
                 
                 user = cursor.fetchone()
                 
-                if user and user[2].strip() == password:
-                    messagebox.showinfo("Login Successful", "¡Bienvenido de nuevo!")
-                    user_id = user[0]  # ID del usuario que inició sesión
-                    UsuarioInterfaz.open_user_window(user_id)
-                else:
-                    messagebox.showwarning("Login Failed", "Credenciales incorrectas.")
+                if user and user[1].strip() == password:
+                    if user[3]==2:
+                        messagebox.showinfo("Login Successful", "¡Bienvenido de nuevo!")
+                        user_id = user[0]  # ID del usuario que inició sesión
+                        UsuarioInterfaz.open_user_window(user_id)
+                    elif user[3]==1:
+                        messagebox.showinfo("Login Successful", "¡Bienvenido de nuevo!")
+                        user_id = user[0]  # ID del usuario que inició sesión
+                        AdminInterfaz.mostrar_dashboard(user_id)
+                    else:
+                        messagebox.showwarning("Login Failed", "Credenciales incorrectas.")
+
             except Exception as e:
                 messagebox.showerror("Error", f"Error durante el login: {e}")
             finally:
