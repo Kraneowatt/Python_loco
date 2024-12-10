@@ -7,8 +7,10 @@ from MenuAdmin.Interfaz.AdminInterfaz import AdminInterfaz
 from ConexionBaseDatos.BaseDatos import ConexionBaseDatos
 
 class main_soporte:
-    def __init__(self,conexion_base_datos):
+    def __init__(self,conexion_base_datos,admin_interfaz,usuario_interfaz):
         self.conexion_base_datos = conexion_base_datos
+        self.admin_interfaz=admin_interfaz
+        self.usuario_interfaz=usuario_interfaz
 
     def register(self,name,username,email,password,confirm_email,confirm_password):
         
@@ -71,12 +73,12 @@ class main_soporte:
                     user_id, stored_password, role_name = user[0], user[1].strip(), user[2]
                     if role_name == 'Administrador':
                         messagebox.showinfo("Login Successful", "¡Bienvenido Administrador!")
-                        AdminInterfaz.mostrar_dashboard(user_id)  # Abre la ventana de administración
+                        self.admin_interfaz.mostrar_dashboard(user_id)  # Abre la ventana de administración
                         
                     if bcrypt.checkpw(password.encode('utf-8'), stored_password.encode('utf-8')):
                         if role_name == 'Usuario':
                             messagebox.showinfo("Login Successful", "¡Bienvenido de nuevo!")
-                            UsuarioInterfaz.mostrar_dashboard(user_id)  # Abre la ventana de usuario después del login exitoso
+                            self.usuario_interfaz.mostrar_dashboard(user_id)  # Abre la ventana de usuario después del login exitoso
                         else:
                             messagebox.showwarning("Login Failed", "Contraseña incorrecta.")
                     else:

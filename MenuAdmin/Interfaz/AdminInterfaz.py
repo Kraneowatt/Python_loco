@@ -9,6 +9,7 @@ class AdminInterfaz:
     def __init__(self, root, admin_logica):
         self.root = root
         self.admin_logica = admin_logica
+    
 
     def mostrar_dashboard(self, user_id):
         """
