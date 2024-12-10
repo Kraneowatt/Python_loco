@@ -71,7 +71,7 @@ class main_soporte:
                     user_id, stored_password, role_name = user[0], user[1].strip(), user[2]
                     if role_name == 'Administrador':
                         messagebox.showinfo("Login Successful", "¡Bienvenido Administrador!")
-                        AdminInterfaz.open_admin_window(user_id)  # Abre la ventana de administración
+                        AdminInterfaz.mostrar_dashboard(user_id)  # Abre la ventana de administración
                         
                     if bcrypt.checkpw(password.encode('utf-8'), stored_password.encode('utf-8')):
                         if role_name == 'Usuario':
